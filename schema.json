@@ -25,6 +25,11 @@
         "key": "placeholder"
       },
       {
+        "type": "text",
+        "label": "User Name",
+        "key": "userName"
+      },
+      {
         "type": "select",
         "label": "Type",
         "key": "optionsType",
