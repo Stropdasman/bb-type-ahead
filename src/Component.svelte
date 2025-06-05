@@ -25,6 +25,7 @@
   export let dataSource
   export let label;
   export let placeholder;
+  export let userName;
   export let defaultValue
   
   export let limitResults;
@@ -183,7 +184,7 @@
     }
   }
 </script>
-  <div class="spectrum-Form-item {labelPos === "above" ? "flexCol" : ""}" use:styleable={$component.styles}>
+  <div class="spectrum-Form-item {labelPos === "above" ? "flexCol" : ""} {userName === 'Frank' ? 'frank-mode' : ''}" use:styleable={$component.styles}>
     {#if !formContext}
       <div class="placeholder">Form components need to be wrapped in a form</div>
     {:else}
@@ -334,6 +335,18 @@
     width: 2.5rem;
     height: 2.5rem;
     border-width: 6px;
+  }
+  .frank-mode {
+    position: relative;
+    animation: frank-spin 2s linear infinite, frank-bounce 0.5s ease-in-out infinite alternate;
+  }
+  @keyframes frank-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes frank-bounce {
+    from { left: 0; }
+    to { left: 10px; }
   }
   @keyframes spinner {
     0% { transform: rotate(0deg); }
