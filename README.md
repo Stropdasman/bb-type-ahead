@@ -2,14 +2,15 @@
 This is a readme for the Type ahead field custom plugin.
 
 # Description
-A component used for querying tables, searching through results, selecting and then saving selected items back to the db.
+A component used for querying tables or data providers, searching through results, selecting and then saving selected items back to the db.
 
 ## Configuration
 
 ### General Section
 This has your main elements; your table select, types and fields.\
 <img width="270" alt="General settings" src="https://github.com/ConorWebb96/bb-typehead/assets/126772285/c62f41c6-e3d4-47f3-89df-1feea5143686">
-* The **Table** field is populates the selectable fields which can be binded to. **REQUIRED**
+* The **Table** field populates the selectable fields which can be binded to. **REQUIRED**
+* You can also use a **Data Provider** query as the source instead of a table.
 * **Type**, there are 3 different types, these change which fields can be selected. **REQUIRED**
 * **Field**, this is used to select the field you wish to target/save back to the database after selecting. **REQUIRED**
 

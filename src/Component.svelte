@@ -23,6 +23,8 @@
   }
 
   export let dataSource
+  export let query
+  export let dataSourceType
   export let label;
   export let placeholder;
   export let defaultValue
@@ -127,30 +129,33 @@
         },
       };
     }
-    const searchResults = await API.searchTable(dataSource.tableId, {
-      paginate: false,
-      limit: limitResults,
-      query: queryParam,
-    });
-    if (sort === true) {
-      if (Array.isArray(searchResults)) { // check if searchResults is an array
-        searchResults.sort((a, b) => {
-          const optionsTypeStateA = a.optionsTypeState.toLowerCase();
-          const optionsTypeStateB = b.optionsTypeState.toLowerCase();
-          if (optionsTypeStateA < optionsTypeStateB) {
-            return -1;
-          }
-          if (optionsTypeStateA > optionsTypeStateB) {
-            return 1;
-          }
-          return 0;
+    const searchResponse = dataSourceType === 'query'
+      ? await API.executeQuery(query.queryId, {
+          parameters: queryParam,
+          pagination: { limit: limitResults, page: 1 }
+        })
+      : await API.searchTable(dataSource.tableId, {
+          paginate: false,
+          limit: limitResults,
+          query: queryParam,
         });
-      } else {
-        // handle error exception here
-      }
+
+    let rows = searchResponse.rows || [];
+    if (sort === true && Array.isArray(rows)) {
+      rows = [...rows].sort((a, b) => {
+        const optionsTypeStateA = String(a.optionsTypeState).toLowerCase();
+        const optionsTypeStateB = String(b.optionsTypeState).toLowerCase();
+        if (optionsTypeStateA < optionsTypeStateB) {
+          return -1;
+        }
+        if (optionsTypeStateA > optionsTypeStateB) {
+          return 1;
+        }
+        return 0;
+      });
     }
     searching = false; // end searching loading
-    results = searchResults.rows.map(({ _id, [labelColumn]: val, [valueColumn]: value }) => ({ _id, [labelColumn]: val, [valueColumn]: value })); // reduce array to include id and selected field
+    results = rows.map(({ _id, [labelColumn]: val, [valueColumn]: value }) => ({ _id, [labelColumn]: val, [valueColumn]: value })); // reduce array to include id and selected field
   }
   const debouncedSearch = debounce(search, 750);
 

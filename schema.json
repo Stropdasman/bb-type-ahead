@@ -9,10 +9,27 @@
     "requiredAncestors": ["form"],
     "settings": [
       {
+        "type": "select",
+        "label": "Data Source Type",
+        "key": "dataSourceType",
+        "defaultValue": "table",
+        "options": [
+          { "label": "Table", "value": "table" },
+          { "label": "Data Provider", "value": "query" }
+        ]
+      },
+      {
         "type": "table",
         "label": "Table",
         "key": "dataSource",
+        "dependsOn": { "setting": "dataSourceType", "value": "table" },
         "required": true
+      },
+      {
+        "type": "query",
+        "label": "Data Provider",
+        "key": "query",
+        "dependsOn": { "setting": "dataSourceType", "value": "query" }
       },
       {
         "type": "text",
