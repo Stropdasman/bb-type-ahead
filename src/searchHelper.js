@@ -1,5 +1,7 @@
-async function searchAndMaybeSort(API, tableId, params, field, sort) {
-  const result = await API.searchTable(tableId, params);
+async function searchAndMaybeSort(API, sourceId, params, field, sort, isDataProvider = false) {
+  const result = isDataProvider
+    ? await API.executeQuery(sourceId, params)
+    : await API.searchTable(sourceId, params);
   let rows = result.rows || [];
   if (sort) {
     rows = [...rows].sort((a, b) => {
