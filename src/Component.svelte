@@ -4,6 +4,7 @@
   import { getContext, onDestroy } from "svelte"
   import { fly } from "svelte/transition"
   import clickOutside from "./click_outside"
+  import Icon from "./Icon.svelte"
 
   const { API } = getContext("sdk");
   const component = getContext("component")
@@ -444,7 +445,12 @@
             {:else}
                <span class="spectrum-Picker-label is-placeholder">{ placeholder ? placeholder : 'Choose some options' }</span>
             {/if}
-            <svg class="spectrum-Icon spectrum-UIIcon-ChevronDown100 spectrum-Picker-menuIcon" focusable="false" aria-hidden="true"><use xlink:href="#spectrum-css-icon-Chevron100"></use></svg>
+            <Icon
+              class="spectrum-Icon spectrum-Picker-menuIcon"
+              name="ChevronDown"
+              size="S"
+              hidden={true}
+            />
           </button>
           {#if open}
             <div
@@ -455,7 +461,12 @@
               aria-labelledby="typeahead-button-{fieldState?.fieldId}"
             >
               <div class="spectrum-Textfield w-full">
-                <svg class="spectrum-Icon spectrum-Icon--sizeM spectrum-Textfield-icon" focusable="false" aria-hidden="true"><use xlink:href="#spectrum-icon-18-Magnify"></use></svg>
+                <Icon
+                  class="spectrum-Icon spectrum-Icon--sizeM spectrum-Textfield-icon"
+                  name="Search"
+                  size="S"
+                  hidden={true}
+                />
                 <input 
                   type="search"
                   bind:value={searchString}
@@ -466,7 +477,14 @@
                   autocomplete="off"
                   spellcheck="false"
                 />
-                <button type="reset" on:click={() => clearSelectedResults()} class="spectrum-ClearButton spectrum-Search-clearButton"><svg class="spectrum-Icon spectrum-UIIcon-Cross75" focusable="false" aria-hidden="true"><use xlink:href="#spectrum-css-icon-Cross75"></use></svg></button>
+                <button type="reset" on:click={() => clearSelectedResults()} class="spectrum-ClearButton spectrum-Search-clearButton">
+                  <Icon
+                    class="spectrum-Icon"
+                    name="Cross"
+                    size="S"
+                    hidden={true}
+                  />
+                </button>
               </div>
               {#if labelColumn != null }
                 {#if searching}

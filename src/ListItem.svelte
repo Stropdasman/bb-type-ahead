@@ -1,6 +1,7 @@
 <!-- ListItem.svelte -->
 <script>
     import { createEventDispatcher } from 'svelte';
+    import Icon from "./Icon.svelte";
     
     export let labelColumn;
     export let valueColumn;
@@ -137,7 +138,13 @@
                 {option[labelColumn]}
             </span>
         {/if}
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="spectrum-Icon spectrum-UIIcon-Checkmark100 spectrum-Menu-checkmark spectrum-Menu-itemIcon" focusable="false" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"></path></svg>
+        <Icon
+            class="spectrum-Icon spectrum-Menu-checkmark spectrum-Menu-itemIcon"
+            name="Checkmark"
+            size="S"
+            weight="bold"
+            hidden={true}
+        />
     </li>
 <style>
     .spectrum-Menu-item.is-highlighted {
@@ -158,7 +165,7 @@
     .spectrum-Menu-item.is-selected .spectrum-Menu-checkmark {
         opacity: 1;
         visibility: visible;
-        fill: var(--spectrum-global-color-static-blue-400);
+        color: var(--spectrum-global-color-static-blue-400);
     }
     .spectrum-Menu-item:not(.is-selected) .spectrum-Menu-checkmark {
         opacity: 0;
